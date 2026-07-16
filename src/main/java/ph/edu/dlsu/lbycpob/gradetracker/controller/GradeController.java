@@ -1,4 +1,4 @@
-package ph.edu.dlsu.lbycpob.gradetrackerwebapp.controller;
+package ph.edu.dlsu.lbycpob.gradetracker.controller;
 
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;

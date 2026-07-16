@@ -1,4 +1,4 @@
-package ph.edu.dlsu.lbycpob.gradetrackerwebapp.util;
+package ph.edu.dlsu.lbycpob.gradetracker.util;
 
 public class IDVerifier {
 
