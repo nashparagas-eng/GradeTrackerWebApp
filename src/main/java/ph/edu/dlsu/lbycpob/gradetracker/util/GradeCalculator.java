@@ -80,6 +80,8 @@ public final class GradeCalculator {
     public static String getRemarks(char rank) {
         return switch (Character.toUpperCase(rank)) {
             case 'S' -> "Excellent";
+            case 'A' -> "Superior";
+            case 'B' -> "Very Good";
     }
 
 
