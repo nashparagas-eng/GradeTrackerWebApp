@@ -83,4 +83,16 @@ public class StudentFormDTO {
     public double getModule5()               { return module5; }
     public void   setModule5(double v)       { this.module5 = v; }
 
+    public double getClassParticipation()    { return classParticipation; }
+    public void   setClassParticipation(double v) { this.classParticipation = v; }
+
+    public double getTeacherEvaluation()     { return teacherEvaluation; }
+    public void   setTeacherEvaluation(double v)  { this.teacherEvaluation = v; }
+
+    public double getPracticalExam()         { return practicalExam; }
+    public void   setPracticalExam(double v) { this.practicalExam = v; }
+
+    public double getProject()               { return project; }
+    public void   setProject(double v)       { this.project = v; } }
+
 
