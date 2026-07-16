@@ -1,6 +1,6 @@
 package ph.edu.dlsu.lbycpob.gradetracker.util;
 
-public class IDVerifier {
+public final class IDVerifier {
 
     private IDVerifier() { }  // prevent instantiation
 
