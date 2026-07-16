@@ -61,6 +61,21 @@ public final class GradeCalculator {
         else                  return 'F';
     }
 
+    /** Remark for a numeric grade string (overload 1). */
+    public static String getRemarks(String grade) {
+        return switch (grade.trim()) {
+            case "4.0" -> "Excellent";
+            case "3.5" -> "Superior";
+            case "3.0" -> "Very Good";
+            case "2.5" -> "Good";
+            case "2.0" -> "Satisfactory";
+            case "1.5" -> "Fair";
+            case "1.0" -> "Poor/Passed";
+            case "0.0" -> "Failed";
+            default    -> "Unknown";
+        };
+    }
+
 
 
 }
