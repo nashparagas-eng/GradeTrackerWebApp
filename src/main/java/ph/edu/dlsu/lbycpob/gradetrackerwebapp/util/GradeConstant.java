@@ -1,4 +1,4 @@
-package ph.edu.dlsu.lbycpob.gradetracker.util;
+package ph.edu.dlsu.lbycpob.gradetrackerwebapp.util;
 
 // ============================================================
 // GradeConstants.java
@@ -7,9 +7,9 @@ package ph.edu.dlsu.lbycpob.gradetracker.util;
 //   Referenced identically in the web layer:
 //     GradeConstants.MAX_STUDENTS, GradeConstants.LAB_WEIGHT, etc.
 // ============================================================
-public final class GradeConstants {
+public final class GradeConstant {
 
-    private GradeConstants() { }   // prevent instantiation
+    private GradeConstant() { }   // prevent instantiation
 
     public static final int    MAX_STUDENTS        = 20;
     public static final double MIN_SCORE           = 0.0;
