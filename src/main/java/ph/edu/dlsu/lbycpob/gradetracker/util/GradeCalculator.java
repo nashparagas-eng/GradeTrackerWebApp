@@ -86,8 +86,9 @@ public final class GradeCalculator {
             case 'D' -> "Satisfactory";
             case 'E' -> "Fair";
             case 'P' -> "Poor/Passed";
+            case 'F' -> "Failed";
+            default  -> "Unknown";
+        };
     }
-
-
-
 }
+
