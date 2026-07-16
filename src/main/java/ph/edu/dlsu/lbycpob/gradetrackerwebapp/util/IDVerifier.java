@@ -19,4 +19,13 @@ public class IDVerifier {
         return calculateDotProduct(idNumber) % GradeConstants.ID_DIVISOR == 0;
     }
 
+    /**
+     * Returns "faculty" or "student" based on the dot-product quotient.
+     * Call ONLY after isValidID() returns true.
+     */
+    public static String getIDRole(String idNumber) {
+        int quotient = calculateDotProduct(idNumber) / GradeConstants.ID_DIVISOR;
+        return (quotient >= GradeConstants.FACULTY_THRESHOLD) ? "faculty" : "student";
+    }
+
 }
