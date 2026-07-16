@@ -42,7 +42,6 @@ import ph.edu.dlsu.lbycpob.gradetracker.util.IDVerifier;
 //   model data built here.
 // ============================================================
 
-
 @Controller
 public class GradeController {
 
@@ -104,4 +103,29 @@ public class GradeController {
             }
         }
 
+        if (bindingResult.hasErrors()) {
+            // Re-populate model and re-render the form with error messages
+            model.addAttribute("students",     repo.getAllStudents());
+            model.addAttribute("studentCount", repo.getCount());
+            model.addAttribute("maxStudents",  GradeConstants.MAX_STUDENTS);
+            model.addAttribute("repoFull",     repo.isFull());
+            model.addAttribute("numModules",   GradeConstants.NUM_MODULES);
+            model.addAttribute("minScore",     GradeConstants.MIN_SCORE);
+            model.addAttribute("maxScore",     GradeConstants.MAX_SCORE);
+            return "enter-students";
+        }
 
+        if (repo.isFull()) {
+            redirectAttrs.addFlashAttribute("errorMessage",
+                    "Maximum of " + GradeConstants.MAX_STUDENTS
+                            + " students reached. Clear data to start over.");
+            return "redirect:/students/enter";
+        }
+
+        Student student = gradeService.buildStudent(dto);
+        repo.addStudent(student);
+
+        redirectAttrs.addFlashAttribute("successMessage",
+                "Student \"" + student.getName() + "\" added successfully.");
+        return "redirect:/students/enter";
+    }
