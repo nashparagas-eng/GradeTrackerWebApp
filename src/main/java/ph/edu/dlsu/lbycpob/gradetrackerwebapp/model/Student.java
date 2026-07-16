@@ -30,3 +30,11 @@ public class Student {
     public void setRawGrade(double rawGrade)       { this.rawGrade = rawGrade; }
     public void setNumericGrade(String numericGrade){ this.numericGrade = numericGrade; }
     public void setLetterRank(char letterRank)     { this.letterRank = letterRank; }
+
+    @Override
+    public String toString() {
+        return "Student{name='" + name + "', id='" + idNumber
+                + "', raw=" + rawGrade + ", grade=" + numericGrade
+                + ", rank=" + letterRank + '}';
+    }
+}
