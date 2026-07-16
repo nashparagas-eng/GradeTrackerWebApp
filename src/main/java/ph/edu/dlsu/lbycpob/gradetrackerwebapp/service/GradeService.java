@@ -44,4 +44,25 @@ public class GradeService {
                 dto.getModule4(), dto.getModule5()
         };
         double labPerformance = GradeCalculator.computeAverage(moduleScores);
+
+        // Replaces GradeCalculator.computeRawGrade(...) call in inputOneStudent()
+        double rawGrade = GradeCalculator.computeRawGrade(
+                labPerformance,
+                dto.getClassParticipation(),
+                dto.getTeacherEvaluation(),
+                dto.getPracticalExam(),
+                dto.getProject()
+        );
+        String numericGrade = GradeCalculator.assignNumericGrade(rawGrade);
+        char   letterRank   = GradeCalculator.assignLetterRank(rawGrade);
+
+        return new Student(
+                dto.getName(),
+                dto.getIdNumber(),
+                rawGrade,
+                numericGrade,
+                letterRank
+        );
+    }
+
 }
