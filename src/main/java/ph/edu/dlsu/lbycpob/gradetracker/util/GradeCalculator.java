@@ -78,6 +78,9 @@ public final class GradeCalculator {
 
     /** Remark for a letter rank char (overload 2). */
     public static String getRemarks(char rank) {
+        return switch (Character.toUpperCase(rank)) {
+            case 'S' -> "Excellent";
+    }
 
 
 
