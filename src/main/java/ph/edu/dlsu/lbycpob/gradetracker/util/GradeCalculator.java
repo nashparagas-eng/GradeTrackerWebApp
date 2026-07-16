@@ -11,10 +11,8 @@ package ph.edu.dlsu.lbycpob.gradetracker.util;
 //     GradeCalculator.getRemarks(grade)
 // ============================================================
 
-public class GradeCalculator {
+public final class GradeCalculator {
 
-    // =============================================
-    //                    JOSHUA
-    // =============================================
+
 
 }
