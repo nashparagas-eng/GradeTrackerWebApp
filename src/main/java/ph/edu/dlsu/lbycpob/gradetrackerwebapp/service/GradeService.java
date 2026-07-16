@@ -31,4 +31,17 @@ import ph.edu.dlsu.lbycpob.gradetracker.util.IDVerifier;
 
 @Service
 public class GradeService {
+    /**
+     * Converts a validated StudentFormDTO into a fully computed Student object.
+     * Mirrors the logic of StudentInputHandler.inputOneStudent() from the desktop,
+     * but without the IO prompts.
+     */
+    public Student buildStudent(StudentFormDTO dto) {
+
+        // Replaces inputLabPerformance() -- compute average of 5 module scores
+        double[] moduleScores = {
+                dto.getModule1(), dto.getModule2(), dto.getModule3(),
+                dto.getModule4(), dto.getModule5()
+        };
+        double labPerformance = GradeCalculator.computeAverage(moduleScores);
 }
