@@ -50,7 +50,7 @@ public class GradeController {
 
     // Constructor injection -- preferred over @Autowired on fields
     public GradeController(StudentSessionRepository repo, GradeService gradeService) {
-        this.repo         = repo;
+        this.repo = repo;
         this.gradeService = gradeService;
     }
 
@@ -60,8 +60,8 @@ public class GradeController {
     @GetMapping("/")
     public String home(Model model) {
         model.addAttribute("studentCount", repo.getCount());
-        model.addAttribute("maxStudents",  GradeConstants.MAX_STUDENTS);
-        model.addAttribute("repoFull",     repo.isFull());
+        model.addAttribute("maxStudents", GradeConstants.MAX_STUDENTS);
+        model.addAttribute("repoFull", repo.isFull());
         return "index";
     }
 
@@ -75,13 +75,13 @@ public class GradeController {
         if (!model.containsAttribute("studentForm")) {
             model.addAttribute("studentForm", new StudentFormDTO());
         }
-        model.addAttribute("students",      repo.getAllStudents());
-        model.addAttribute("studentCount",  repo.getCount());
-        model.addAttribute("maxStudents",   GradeConstants.MAX_STUDENTS);
-        model.addAttribute("repoFull",      repo.isFull());
-        model.addAttribute("numModules",    GradeConstants.NUM_MODULES);
-        model.addAttribute("minScore",      GradeConstants.MIN_SCORE);
-        model.addAttribute("maxScore",      GradeConstants.MAX_SCORE);
+        model.addAttribute("students", repo.getAllStudents());
+        model.addAttribute("studentCount", repo.getCount());
+        model.addAttribute("maxStudents", GradeConstants.MAX_STUDENTS);
+        model.addAttribute("repoFull", repo.isFull());
+        model.addAttribute("numModules", GradeConstants.NUM_MODULES);
+        model.addAttribute("minScore", GradeConstants.MIN_SCORE);
+        model.addAttribute("maxScore", GradeConstants.MAX_SCORE);
         return "enter-students";
     }
 
@@ -105,13 +105,13 @@ public class GradeController {
 
         if (bindingResult.hasErrors()) {
             // Re-populate model and re-render the form with error messages
-            model.addAttribute("students",     repo.getAllStudents());
+            model.addAttribute("students", repo.getAllStudents());
             model.addAttribute("studentCount", repo.getCount());
-            model.addAttribute("maxStudents",  GradeConstants.MAX_STUDENTS);
-            model.addAttribute("repoFull",     repo.isFull());
-            model.addAttribute("numModules",   GradeConstants.NUM_MODULES);
-            model.addAttribute("minScore",     GradeConstants.MIN_SCORE);
-            model.addAttribute("maxScore",     GradeConstants.MAX_SCORE);
+            model.addAttribute("maxStudents", GradeConstants.MAX_STUDENTS);
+            model.addAttribute("repoFull", repo.isFull());
+            model.addAttribute("numModules", GradeConstants.NUM_MODULES);
+            model.addAttribute("minScore", GradeConstants.MIN_SCORE);
+            model.addAttribute("maxScore", GradeConstants.MAX_SCORE);
             return "enter-students";
         }
 
@@ -140,3 +140,22 @@ public class GradeController {
                 "All student data cleared.");
         return "redirect:/";
     }
+
+    // =====================================================================
+    // GET /report   -- Grade report table
+    //                  (was ReportPrinter.printReport(repo))
+    // =====================================================================
+    @GetMapping("/report")
+    public String viewReport(Model model) {
+        List<Student> students = repo.getAllStudents();
+        model.addAttribute("students", students);
+        model.addAttribute("hasData", !students.isEmpty());
+
+        // Provide GradeCalculator reference for the template to call getRemarks
+        // (Thymeleaf cannot call static methods directly, so we precompute remarks)
+        // The remarks are computed in the template via a helper approach below.
+        return "report";
+    }
+
+
+}
