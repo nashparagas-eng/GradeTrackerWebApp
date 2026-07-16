@@ -2,13 +2,14 @@ package ph.edu.dlsu.lbycpob.gradetracker.util;
 
 public final class IDVerifier {
 
-    private IDVerifier() { }  // prevent instantiation
+    private IDVerifier() {
+    }  // prevent instantiation
 
     /**
      * Returns true iff the ID string passes all three checks:
-     *   (1) exactly ID_LENGTH (8) characters
-     *   (2) all characters are digits
-     *   (3) dot-product is divisible by ID_DIVISOR (11)
+     * (1) exactly ID_LENGTH (8) characters
+     * (2) all characters are digits
+     * (3) dot-product is divisible by ID_DIVISOR (11)
      */
 
     public static boolean isValidID(String idNumber) {
@@ -30,8 +31,8 @@ public final class IDVerifier {
 
     /**
      * Returns a human-readable validation result message.
-     *   Invalid -> message starts with "Invalid"
-     *   Valid   -> "Valid faculty ID number." or "Valid student ID number."
+     * Invalid -> message starts with "Invalid"
+     * Valid   -> "Valid faculty ID number." or "Valid student ID number."
      */
     public static String validateID(String idNumber) {
         if (idNumber == null || idNumber.length() != GradeConstants.ID_LENGTH)
@@ -48,7 +49,9 @@ public final class IDVerifier {
         return "Valid " + getIDRole(idNumber) + " ID number.";
     }
 
-    /** Dot product of the ID digits against descending weights [8..1]. */
+    /**
+     * Dot product of the ID digits against descending weights [8..1].
+     */
     private static int calculateDotProduct(String idNumber) {
         final int[] WEIGHTS = {8, 7, 6, 5, 4, 3, 2, 1};
         int sum = 0;
@@ -58,3 +61,4 @@ public final class IDVerifier {
         return sum;
     }
 }
+
