@@ -64,5 +64,11 @@ public class GradeService {
                 letterRank
         );
     }
-
+    /**
+     * Validates the ID number via IDVerifier and returns the result message.
+     * Replaces the interactive do-while loop in IDVerifier.verifyID().
+     */
+    public String verifyIdNumber(String idNumber) {
+        return IDVerifier.validateID(idNumber == null ? "" : idNumber.trim());
+    }
 }
