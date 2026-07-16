@@ -46,4 +46,15 @@ public class StudentSessionRepository {
         if (index < 0 || index >= students.size()) return null;
         return students.get(index);
     }
+
+    /** Total number of students currently stored. */
+    public int getCount() { return students.size(); }
+
+    /** Clears all students (equivalent to resetting the app on the desktop). */
+    public void clear() { students.clear(); }
+
+    /** True when the list has reached MAX_STUDENTS. */
+    public boolean isFull() { return students.size() >= GradeConstants.MAX_STUDENTS; }
+}
+
 }
