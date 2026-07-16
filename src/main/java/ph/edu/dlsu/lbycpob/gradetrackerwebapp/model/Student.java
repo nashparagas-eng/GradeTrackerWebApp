@@ -9,3 +9,12 @@ public class Student {
     private double rawGrade;
     private String numericGrade;
     private char   letterRank;
+    /** Full constructor -- mirrors the original desktop signature. */
+    public Student(String name, String idNumber,
+                   double rawGrade, String numericGrade, char letterRank) {
+        this.name         = name.trim();
+        this.idNumber     = idNumber.trim();
+        this.rawGrade     = Math.round(rawGrade * 100.0) / 100.0;
+        this.numericGrade = numericGrade.trim();
+        this.letterRank   = Character.toUpperCase(letterRank);
+    }
