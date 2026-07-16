@@ -1,4 +1,4 @@
-package ph.edu.dlsu.lbycpob.gradetrackerwebapp.dto;
+package ph.edu.dlsu.lbycpob.gradetracker.dto;
 
 // ============================================================
 // ClassStatsResult.java

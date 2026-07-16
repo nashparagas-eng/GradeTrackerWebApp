@@ -1,4 +1,4 @@
-package ph.edu.dlsu.lbycpob.gradetrackerwebapp.service;
+package ph.edu.dlsu.lbycpob.gradetracker.service;
 
 import org.springframework.stereotype.Service;
 import ph.edu.dlsu.lbycpob.gradetracker.dto.StudentFormDTO;
