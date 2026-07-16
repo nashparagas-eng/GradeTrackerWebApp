@@ -66,3 +66,42 @@ public class GradeController {
         return "index";
     }
 
+    // =====================================================================
+    // GET /students/enter   -- Show the student data entry form
+    //                          (was menu option 1 -> inputStudentData())
+    // =====================================================================
+    @GetMapping("/students/enter")
+    public String showEntryForm(Model model) {
+        // Provide a fresh DTO for the form (Thymeleaf binds to it)
+        if (!model.containsAttribute("studentForm")) {
+            model.addAttribute("studentForm", new StudentFormDTO());
+        }
+        model.addAttribute("students",      repo.getAllStudents());
+        model.addAttribute("studentCount",  repo.getCount());
+        model.addAttribute("maxStudents",   GradeConstants.MAX_STUDENTS);
+        model.addAttribute("repoFull",      repo.isFull());
+        model.addAttribute("numModules",    GradeConstants.NUM_MODULES);
+        model.addAttribute("minScore",      GradeConstants.MIN_SCORE);
+        model.addAttribute("maxScore",      GradeConstants.MAX_SCORE);
+        return "enter-students";
+    }
+
+    // =====================================================================
+    // POST /students/add   -- Submit one student's data
+    //                         (was inputOneStudent() + repo.addStudent())
+    // =====================================================================
+    @PostMapping("/students/add")
+    public String addStudent(@Valid @ModelAttribute("studentForm") StudentFormDTO dto,
+                             BindingResult bindingResult,
+                             RedirectAttributes redirectAttrs,
+                             Model model) {
+        // Layer 1: Bean Validation (field-level annotations on StudentFormDTO)
+        // Layer 2: ID semantic check via IDVerifier
+        if (!bindingResult.hasErrors()) {
+            String idResult = IDVerifier.validateID(dto.getIdNumber());
+            if (idResult.startsWith("Invalid")) {
+                bindingResult.rejectValue("idNumber", "id.invalid", idResult);
+            }
+        }
+
+
