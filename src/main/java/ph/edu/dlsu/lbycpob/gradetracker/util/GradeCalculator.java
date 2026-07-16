@@ -82,6 +82,8 @@ public final class GradeCalculator {
             case 'S' -> "Excellent";
             case 'A' -> "Superior";
             case 'B' -> "Very Good";
+            case 'C' -> "Good";
+            case 'D' -> "Satisfactory";
     }
 
 
