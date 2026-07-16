@@ -27,4 +27,23 @@ import java.util.List;
 @Component
 @SessionScope
 public class StudentSessionRepository {
+    private final List<Student> students = new ArrayList<>();
+
+    /** Adds a student to the session list if capacity allows. */
+    public boolean addStudent(Student s) {
+        if (students.size() >= GradeConstants.MAX_STUDENTS) return false;
+        students.add(s);
+        return true;
+    }
+
+    /** Returns an unmodifiable view of the student list. */
+    public List<Student> getAllStudents() {
+        return Collections.unmodifiableList(students);
+    }
+
+    /** Returns the student at the given zero-based index, or null. */
+    public Student getStudent(int index) {
+        if (index < 0 || index >= students.size()) return null;
+        return students.get(index);
+    }
 }
