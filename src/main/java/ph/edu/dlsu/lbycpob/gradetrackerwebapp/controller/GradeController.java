@@ -157,5 +157,50 @@ public class GradeController {
         return "report";
     }
 
+    // =====================================================================
+    // GET /stats   -- Class statistics
+    //                (was ReportPrinter.printClassStats(repo))
+    // =====================================================================
+    @GetMapping("/stats")
+    public String viewStats(Model model) {
+        List<Student> students = repo.getAllStudents();
+
+        if (students.isEmpty()) {
+            model.addAttribute("hasData", false);
+            return "stats";
+        }
+
+        // Mirrors the seeding and loop in ReportPrinter.printClassStats()
+        double highest      = students.getFirst().getRawGrade();
+        double lowest       = students.getFirst().getRawGrade();
+        double sum          = students.getFirst().getRawGrade();
+        int    highestIndex = 0;
+        int    lowestIndex  = 0;
+
+        for (int i = 1; i < students.size(); i++) {
+            double g = students.get(i).getRawGrade();
+            sum += g;
+            if (g > highest) { highest = g; highestIndex = i; }
+            if (g < lowest)  { lowest  = g; lowestIndex  = i; }
+        }
+
+        double classMean = sum / students.size();
+
+        ClassStatsResult stats = new ClassStatsResult();
+        stats.setTotalStudents(students.size());
+        stats.setHighestName(students.get(highestIndex).getName());
+        stats.setHighestGrade(highest);
+        stats.setHighestRank(GradeCalculator.assignLetterRank(highest));
+        stats.setLowestName(students.get(lowestIndex).getName());
+        stats.setLowestGrade(lowest);
+        stats.setLowestRank(GradeCalculator.assignLetterRank(lowest));
+        stats.setClassMean(classMean);
+        stats.setMeanRank(GradeCalculator.assignLetterRank(classMean));
+
+        model.addAttribute("stats",   stats);
+        model.addAttribute("hasData", true);
+        return "stats";
+    }
+
 
 }
